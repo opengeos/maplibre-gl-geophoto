@@ -154,6 +154,7 @@ The main control class implementing MapLibre's `IControl` interface.
 | `pathColor`                 | `string`  | `'#4a90d9'`   | Path line color                                        |
 | `pointColor`                | `string`  | `'#4a90d9'`   | Camera point color                                     |
 | `selectedPointColor`        | `string`  | `'#f97316'`   | Selected camera point color                            |
+| `imageFadeDuration`         | `number`  | `300`         | Cross-fade duration between images in ms (0 to disable)|
 
 #### Methods
 
