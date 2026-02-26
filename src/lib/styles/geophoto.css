@@ -1,0 +1,474 @@
+/**
+ * MapLibre GL GeoPhoto Control Styles
+ */
+
+/* File picker mode */
+.geophoto-file-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 8px;
+}
+
+.geophoto-instructions {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.geophoto-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.geophoto-btn:hover {
+  background: #eaeaea;
+  border-color: #ccc;
+}
+
+.geophoto-btn-icon {
+  font-size: 16px;
+}
+
+.geophoto-file-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  color: #999;
+  font-size: 11px;
+}
+
+.geophoto-file-divider::before,
+.geophoto-file-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.geophoto-zip-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.geophoto-zip-label:hover {
+  background: #eaeaea;
+  border-color: #ccc;
+}
+
+.geophoto-url-panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.geophoto-url-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.geophoto-url-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+}
+
+.geophoto-url-input:focus {
+  outline: none;
+  border-color: #4a90d9;
+  box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.15);
+}
+
+.geophoto-url-submit {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Loading state */
+.geophoto-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 16px;
+}
+
+.geophoto-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #4a90d9;
+  border-radius: 50%;
+  animation: geophoto-spin 0.8s linear infinite;
+}
+
+@keyframes geophoto-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.geophoto-loading-text {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+/* Image viewer mode */
+.geophoto-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.geophoto-image-container {
+  position: relative;
+  width: 100%;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 100px;
+}
+
+.geophoto-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.geophoto-image-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Metadata display */
+.geophoto-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px 0;
+  font-size: 11px;
+  color: #555;
+}
+
+.geophoto-metadata-row {
+  display: flex;
+  gap: 6px;
+}
+
+.geophoto-metadata-label {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+}
+
+.geophoto-metadata-value {
+  color: #666;
+  word-break: break-all;
+}
+
+/* Navigation bar */
+.geophoto-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.geophoto-nav-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a90d9;
+  background: transparent;
+  border: 1px solid #4a90d9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.geophoto-nav-btn:hover:not(:disabled) {
+  background: #4a90d9;
+  color: #fff;
+}
+
+.geophoto-nav-btn:disabled {
+  color: #ccc;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.geophoto-nav-counter {
+  font-size: 12px;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+  margin: 0 4px;
+}
+
+/* Actions bar */
+.geophoto-actions {
+  padding: 6px 0 0 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.geophoto-btn-small {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.geophoto-btn-small:hover {
+  color: #555;
+  border-color: #bbb;
+}
+
+/* Play button */
+.geophoto-play-btn {
+  padding: 4px 8px;
+  min-width: 30px;
+}
+
+.geophoto-play-btn.geophoto-playing {
+  background: #4a90d9;
+  color: #fff;
+}
+
+/* Expand button on image */
+.geophoto-expand-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.geophoto-image-container:hover .geophoto-expand-btn {
+  opacity: 1;
+}
+
+.geophoto-expand-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Lightbox overlay */
+.geophoto-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.geophoto-lightbox.geophoto-lightbox-open {
+  display: flex;
+}
+
+.geophoto-lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.geophoto-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.geophoto-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.geophoto-lightbox-nav {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+}
+
+.geophoto-lightbox-nav-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.geophoto-lightbox-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Panel resize handle — sits fully inside the panel edge */
+.geophoto-resize-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  z-index: 20;
+  user-select: none;
+  touch-action: none;
+}
+
+.geophoto-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 40px;
+  background: #ddd;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.geophoto-resize-handle:hover::after {
+  background: #999;
+}
+
+.geophoto-resize-handle:active::after {
+  background: #666;
+}
+
+.geophoto-resize-handle-left {
+  left: 0;
+}
+
+.geophoto-resize-handle-left::after {
+  left: 2px;
+}
+
+.geophoto-resize-handle-right {
+  right: 0;
+}
+
+.geophoto-resize-handle-right::after {
+  right: 2px;
+}
+
+/* Icon-only nav buttons */
+.geophoto-nav-btn-icon {
+  padding: 4px 6px;
+  min-width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.geophoto-nav-btn-icon svg {
+  display: block;
+}
+
+/* Play button sizing */
+.geophoto-nav-btn.geophoto-play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.geophoto-play-btn svg {
+  display: block;
+}
+
+/* Override panel sizing for geophoto */
+.geophoto-panel.plugin-control-panel {
+  max-height: calc(100vh - 80px);
+  overflow: visible;
+}
+
+.geophoto-panel .plugin-control-content {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
