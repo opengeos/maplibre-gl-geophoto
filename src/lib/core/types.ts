@@ -128,6 +128,9 @@ export interface GeoPhotoControlOptions extends PluginControlOptions {
 
   /** Selected camera point color @default '#f97316' */
   selectedPointColor?: string;
+
+  /** Duration in milliseconds for cross-fade transition between images. Set to 0 to disable. @default 300 */
+  imageFadeDuration?: number;
 }
 
 /**

@@ -177,6 +177,24 @@
   border-radius: 4px;
 }
 
+.geophoto-image-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.geophoto-image-front {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+}
+
+.geophoto-image-front.geophoto-image-fade-out {
+  opacity: 0;
+}
+
 .geophoto-image-loading {
   position: absolute;
   inset: 0;
