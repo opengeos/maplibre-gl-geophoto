@@ -39,6 +39,7 @@ const DEFAULT_OPTIONS: Required<GeoPhotoControlOptions> = {
   pathColor: '#4a90d9',
   pointColor: '#4a90d9',
   selectedPointColor: '#f97316',
+  imageFadeDuration: 300,
 };
 
 type EventHandlersMap = globalThis.Map<GeoPhotoEvent, Set<GeoPhotoEventHandler>>;
@@ -92,6 +93,7 @@ export class GeoPhotoControl implements IControl {
   private _viewerEl?: HTMLElement;
   private _loadingEl?: HTMLElement;
   private _imageEl?: HTMLImageElement;
+  private _imageElBack?: HTMLImageElement;
   private _imagePlaceholder?: HTMLElement;
   private _coordsEl?: HTMLElement;
   private _elevEl?: HTMLElement;
@@ -647,9 +649,20 @@ export class GeoPhotoControl implements IControl {
     const imgContainer = document.createElement('div');
     imgContainer.className = 'geophoto-image-container';
 
+    // Back image (sits behind, shows previous photo during crossfade)
+    this._imageElBack = document.createElement('img');
+    this._imageElBack.className = 'geophoto-image geophoto-image-back';
+    this._imageElBack.alt = '';
+
+    // Front image (sits on top, fades in)
     this._imageEl = document.createElement('img');
-    this._imageEl.className = 'geophoto-image';
+    this._imageEl.className = 'geophoto-image geophoto-image-front';
     this._imageEl.alt = 'Streetview photo';
+
+    const fadeDuration = this._options.imageFadeDuration;
+    if (fadeDuration > 0) {
+      this._imageEl.style.transitionDuration = `${fadeDuration}ms`;
+    }
 
     this._imagePlaceholder = document.createElement('div');
     this._imagePlaceholder.className = 'geophoto-image-loading';
@@ -664,6 +677,7 @@ export class GeoPhotoControl implements IControl {
     expandBtn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
     expandBtn.addEventListener('click', () => this._openLightbox());
 
+    imgContainer.appendChild(this._imageElBack);
     imgContainer.appendChild(this._imageEl);
     imgContainer.appendChild(this._imagePlaceholder);
     imgContainer.appendChild(expandBtn);
@@ -1095,10 +1109,19 @@ export class GeoPhotoControl implements IControl {
       this._lastBtn.disabled = this._currentIndex >= this._cameras.length - 1;
     }
 
-    // Load image
+    // Load image with crossfade
     if (this._imageEl && this._imageResolver) {
       if (this._imagePlaceholder) this._imagePlaceholder.style.display = '';
       const loadIndex = this._currentIndex;
+      const fadeDuration = this._options.imageFadeDuration;
+      const useFade = fadeDuration > 0 && this._imageElBack && this._imageEl.src;
+
+      // Snapshot current image into the back layer before loading the new one
+      if (useFade && this._imageElBack) {
+        this._imageElBack.src = this._imageEl.src;
+        this._imageEl.classList.add('geophoto-image-fade-out');
+      }
+
       try {
         const url = await this._imageResolver(camera.id);
         if (url && this._currentIndex === loadIndex) {
@@ -1109,13 +1132,20 @@ export class GeoPhotoControl implements IControl {
           }
           this._imageEl.onload = () => {
             if (this._imagePlaceholder) this._imagePlaceholder.style.display = 'none';
+            if (useFade && this._imageEl) {
+              // Force reflow so the transition triggers from opacity 0 -> 1
+              void this._imageEl.offsetWidth;
+              this._imageEl.classList.remove('geophoto-image-fade-out');
+            }
           };
           this._imageEl.onerror = () => {
             if (this._imagePlaceholder) this._imagePlaceholder.style.display = 'none';
+            if (this._imageEl) this._imageEl.classList.remove('geophoto-image-fade-out');
           };
         }
       } catch {
         if (this._imagePlaceholder) this._imagePlaceholder.style.display = 'none';
+        if (this._imageEl) this._imageEl.classList.remove('geophoto-image-fade-out');
       }
     }
   }
